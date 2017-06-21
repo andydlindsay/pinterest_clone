@@ -38,7 +38,8 @@ mongoose.connection.on('error', (err) => {
 const port = process.env.PORT || 8080;
 
 // routes
-const posts = require('./routes/posts');
+const public = require('./routes/public');
+const private = require('./routes/private');
 
 // use morgan logger except during testing
 if (config.util.getEnv('NODE_ENV') !== 'test') {
@@ -56,7 +57,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // routes
-app.use('/api/posts', posts);
+app.use('/api/public', public);
+app.use('/api/private', private);
 
 // catchall redirect
 app.get('*', (req, res) => {
