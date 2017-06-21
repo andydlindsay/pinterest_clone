@@ -47,6 +47,7 @@ export class AuthService {
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
     this.auth0.client.userInfo(authResult.accessToken, (err, profile) => {
       if (profile) {
+        console.log('profile:', profile);
         localStorage.setItem('sub', profile.sub);
       }
     });
