@@ -9,15 +9,22 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
 
+import { AuthService } from './services/auth.service';
+
 import { AppComponent } from './app.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { HomeComponent } from './components/home/home.component';
 
 const appRoutes: Routes = [
+  { path: '', component: HomeComponent },
   { path: '**', redirectTo: '/' }
 ];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavigationComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +38,8 @@ const appRoutes: Routes = [
     FlexLayoutModule
   ],
   providers: [
-    Title
+    Title,
+    AuthService
   ],
   bootstrap: [
     AppComponent

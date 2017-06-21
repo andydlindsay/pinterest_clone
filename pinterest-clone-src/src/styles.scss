@@ -9,3 +9,27 @@
         width: 100% !important;
     }
 }
+
+// variables
+$title: 'Cuprum', sans-serif;
+$primary: blue;
+$accent: orange;
+
+// elements
+html {
+    font-family: $title !important;
+}
+
+body {
+    font-family: $title !important;
+    margin: auto;
+    width: 80%;
+    background-color: $accent;
+}
+
+// classes
+.title-font {
+    font-family: $title !important;
+}
+
+// id's
