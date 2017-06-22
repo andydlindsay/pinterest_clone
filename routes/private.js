@@ -23,7 +23,7 @@ const checkJwt = jwt({
 // const checkScopes = jwtAuthz(['write:posts']);
 
 // add post (removed checkScopes from below June 21 2:20pm)
-router.post('/new', checkJwt, (req, res) => {
+router.post('/posts/new', checkJwt, (req, res) => {
     let tags = req.body.tags.split(',');
     const newPost = new Post({
         sub: req.body.sub,
@@ -44,7 +44,7 @@ router.post('/new', checkJwt, (req, res) => {
 });
 
 // delete post
-router.delete('/:id', checkJwt, (req, res) => {
+router.delete('/posts/:id', checkJwt, (req, res) => {
     const post_id = req.params.id;
     Post.deletePost(post_id, (err, doc) => {
         if (err) {
@@ -53,6 +53,21 @@ router.delete('/:id', checkJwt, (req, res) => {
             res.json({ success: true, msg: 'Post deleted.' });
         } else {
             res.json({ success: false, msg: 'Failed to delete post.' });
+        }
+    });
+});
+
+// fave a post
+router.post('/fave/:id', checkJwt, (req, res) => {
+    const post_id = req.params.id;
+    const sub = req.body.sub;
+    Post.favePost(post_id, sub, (err, doc) => {
+        if (err) {
+            res.json({ success: false, msg: 'Failed to fave post.', errmsg: err.message });
+        } else if (doc) {
+            res.json({ success: true, post: doc });
+        } else {
+            res.json({ success: false, msg: 'Failed to fave post.' });
         }
     });
 });

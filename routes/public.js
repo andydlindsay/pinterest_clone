@@ -3,7 +3,7 @@ const express = require('express'),
       Post = require('../models/post');
 
 // get all posts
-router.get('/', (req, res) => {
+router.get('/posts', (req, res) => {
     const itemsPerPage = req.query.itemsperpage;
     const currentPage = req.query.currentpage;
     Post.getPosts(itemsPerPage, currentPage, (err, docs) => {
@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 });
 
 // get post by id
-router.get('/:id', (req, res) => {
+router.get('/posts/:id', (req, res) => {
     const post_id = req.params.id;
     Post.getPostById(post_id, (err, doc) => {
         if (err) {
@@ -32,7 +32,7 @@ router.get('/:id', (req, res) => {
 });
 
 // get posts by user
-router.get('/byuser/:sub', (req, res) => {
+router.get('/posts/byuser/:sub', (req, res) => {
     const sub = req.params.sub;
     Post.getPostsByUser(sub, (err, docs) => {
         if (err) {

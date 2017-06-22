@@ -68,3 +68,8 @@ module.exports.getPostsByUser = function(sub, callback) {
 module.exports.addPost = function(newPost, callback) {
     newPost.save(callback);
 };
+
+// fave a post
+module.exports.favePost = function(post_id, sub, callback) {
+    Post.findByIdAndUpdate(post_id, { $push: { 'faves': sub }}, callback);
+}

@@ -2,7 +2,7 @@
 ### Part of the freeCodeCamp curriculum
 
 ## User Stories
-- [ ] As an unauthenticated user, I can login with Twitter.
+- [X] As an unauthenticated user, I can login with Twitter.
 - [ ] As an authenticated user, I can link to images.
 - [ ] As an authenticated user, I can delete images that I've linked to.
 - [ ] As an authenticated user, I can see a Pinterest-style wall of all the images I've linked to.

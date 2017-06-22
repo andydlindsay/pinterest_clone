@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { PostService } from '../../services/post.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  posts: any;
+  itemsPerPage: number;
+  currentPage: number;
+
+  constructor(
+    private titleService: Title,
+    private postService: PostService
+  ) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Home - Interestink');
+    this.itemsPerPage = 20;
+    this.currentPage = 1;
+    this.postService.getPosts(this.itemsPerPage, this.currentPage).subscribe(
+      data => {
+        if (data) {
+          this.posts = data.posts;
+        }
+      },
+      err => {
+        console.error(err);
+      }
+    )
   }
 
 }

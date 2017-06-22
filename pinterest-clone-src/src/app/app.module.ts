@@ -9,15 +9,19 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import 'hammerjs';
 
+import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './services/auth.service';
+import { PostService } from './services/post.service';
 
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { HomeComponent } from './components/home/home.component';
 import { CallbackComponent } from './components/callback/callback.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'callback', component: CallbackComponent },
   { path: '**', redirectTo: '/' }
 ];
@@ -27,7 +31,8 @@ const appRoutes: Routes = [
     AppComponent,
     NavigationComponent,
     HomeComponent,
-    CallbackComponent
+    CallbackComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +47,9 @@ const appRoutes: Routes = [
   ],
   providers: [
     Title,
-    AuthService
+    AuthService,
+    AuthGuard,
+    PostService
   ],
   bootstrap: [
     AppComponent
