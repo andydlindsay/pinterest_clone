@@ -36,6 +36,10 @@ body {
     color: $primary-text-color;
 }
 
+form {
+    padding: 16px !important;
+}
+
 md-toolbar a {
     color: inherit;
     text-decoration: inherit;
@@ -52,6 +56,10 @@ md-card {
 }
 
 // classes
+.primary-text {
+    color: $primary-text-color;
+}
+
 .primary {
     background-color: $primary-color;
     color: $primary-color-text;
@@ -62,8 +70,22 @@ md-card {
     color: $primary-text-color;
 }
 
+.primary-dark {
+    background-color: $primary-color-dark;
+    color: $primary-color-text;
+}
+
+.accent {
+    background-color: $accent-color;
+    color: $primary-color-text;
+}
+
 .app-content {
     padding: 10px;
+}
+
+.text-center {
+    text-align: center;
 }
 
 .title-font {
@@ -95,7 +117,8 @@ md-card {
     width: 100%;
     margin-top: 5px;
     font-size: 1.25em;
-    padding-top: 0px;
+    padding-top: 0px !important;
+    margin-top: 0px !important;
 }
 
 .mat-menu-panel {
@@ -132,7 +155,7 @@ md-card {
 }
 
 .margin-auto {
-    margin: 0 auto;
+    margin: auto !important;
 }
 
 .display-block {

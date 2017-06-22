@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
       data => {
         if (data) {
           this.posts = data.posts;
+          console.log('posts:', this.posts);
         }
       },
       err => {

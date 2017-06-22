@@ -1,3 +1,51 @@
-<p>
-  profile works!
-</p>
+<md-card class="margin-bottom-8">
+  <md-toolbar class="title-font accent">
+    <span class="">Add a Post!</span>
+  </md-toolbar>
+  <md-card-content>
+    <form [formGroup]="postForm">
+      <md-input-container>
+        <input type="text" required mdInput placeholder="Image url" formControlName="imageUrl" id="imageUrl">
+        <md-hint *ngIf="formErrors.imageUrl">{{ formErrors.imageUrl }}</md-hint>
+      </md-input-container>
+      <md-input-container>
+        <input type="text" mdInput placeholder="Title" formControlName="title" id="title">
+        <md-hint *ngIf="formErrors.title">{{ formErrors.title }}</md-hint>
+      </md-input-container>
+      <md-input-container>
+        <input type="text" mdInput placeholder="Tags (separated by commas)" formControlName="tags" id="tags">
+        <md-hint *ngIf="formErrors.tags">{{ formErrors.tags }}</md-hint>
+      </md-input-container>
+      <button type="button" md-raised-button color="primary" (click)="onPostFormSubmit()">Add Post</button>
+    </form>
+  </md-card-content>
+</md-card>
+
+<md-card>
+  <md-toolbar class="title-font accent">
+    <span class="">Your Posts</span>
+  </md-toolbar>
+  <md-card-content>
+
+    <!-- display while fetching posts -->
+    <div *ngIf="this.posts === undefined">
+      <md-spinner></md-spinner>
+    </div>
+
+    <!-- display when post fetching complete -->
+    <div *ngIf="this.posts !== undefined">
+
+      <!-- display if no posts -->
+      <div *ngIf="this.posts.length < 1" class="padding-bottom-8">
+        <h1 class="title-font text-center normal-font primary-text">You have no posts! Use the form above to post something now!</h1>
+      </div>
+
+      <!-- show posts -->
+      <div *ngIf="this.posts.length > 0" class="padding-bottom-8">
+        
+      </div>
+
+    </div>
+
+  </md-card-content>
+</md-card>

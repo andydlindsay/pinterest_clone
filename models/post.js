@@ -7,7 +7,7 @@ const postSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    username: {
+    nickname: {
         type: String,
         required: true
     },
@@ -57,10 +57,13 @@ module.exports.deletePost = function(post_id, callback) {
 }
 
 // get posts by user
-module.exports.getPostsByUser = function(sub, callback) {
+module.exports.getPostsByUser = function(sub, itemsPerPage, currentPage, callback) {
+    const currPage = Number(currentPage) || 1;
     const query = { sub };
     Post.find(query)
         .sort({ 'ts': 'desc' })
+        .skip(Number(itemsPerPage) * (currPage - 1))
+        .limit(Number(itemsPerPage))
         .exec(callback);
 };
 
@@ -72,4 +75,9 @@ module.exports.addPost = function(newPost, callback) {
 // fave a post
 module.exports.favePost = function(post_id, sub, callback) {
     Post.findByIdAndUpdate(post_id, { $push: { 'faves': sub }}, callback);
+}
+
+// unfave a post
+module.exports.unfavePost = function(post_id, sub, callback) {
+    Post.findByIdAndUpdate(post_id, { $pull: { 'faves': sub }}, callback);
 }

@@ -2,7 +2,7 @@ const express = require('express'),
       router = express.Router(),
       Post = require('../models/post'),
       jwt = require('express-jwt'),
-    //   jwtAuthz = require('express-jwt-authz'),
+      jwtAuthz = require('express-jwt-authz'),
       jwksRsa = require('jwks-rsa');
 
 const checkJwt = jwt({
@@ -15,7 +15,7 @@ const checkJwt = jwt({
   }),
 
   // Validate the audience and the issuer.
-  audience: process.env.AUTH0_AUDIENCE,
+  aud: process.env.AUTH0_AUDIENCE,
   issuer: `https://${process.env.AUTH0_DOMAIN}/`,
   algorithms: ['RS256']
 });
@@ -27,9 +27,9 @@ router.post('/posts/new', checkJwt, (req, res) => {
     let tags = req.body.tags.split(',');
     const newPost = new Post({
         sub: req.body.sub,
-        username: req.body.username,
+        nickname: req.body.nickname,
         imageUrl: req.body.imageUrl,
-        title: req.body.title || 'post by ' + req.body.username,
+        title: req.body.title || 'post by ' + req.body.nickname,
         tags
     });
     Post.addPost(newPost, (err, doc) => {
@@ -68,6 +68,21 @@ router.post('/fave/:id', checkJwt, (req, res) => {
             res.json({ success: true, post: doc });
         } else {
             res.json({ success: false, msg: 'Failed to fave post.' });
+        }
+    });
+});
+
+// unfave a post
+router.post('/unfave/:id', checkJwt, (req, res) => {
+    const post_id = req.params.id;
+    const sub = req.body.sub;
+    Post.unfavePost(post_id, sub, (err, doc) => {
+        if (err) {
+            res.json({ success: false, msg: 'Failed to unfave post.', errmsg: err.message });
+        } else if (doc) {
+            res.json({ success: true, post: doc });
+        } else {
+            res.json({ success: false, msg: 'Failed to unfave post.' });
         }
     });
 });

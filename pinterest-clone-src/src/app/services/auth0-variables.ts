@@ -9,7 +9,7 @@ interface AuthConfig {
 export const AUTH_CONFIG: AuthConfig = {
     CLIENT_ID: 'h14d19SmWW9iWjt7hEEZi33HJQ7uzqNd',
     CLIENT_DOMAIN: 'andydlindsay.auth0.com',
-    AUDIENCE: 'https://andydlindsay.auth0.com/userinfo',
+    AUDIENCE: 'https://andydlindsay-pinterest-clone.herokuapp.com',
     REDIRECT: 'http://localhost:4200/callback',
     SCOPE: 'openid profile'
 };

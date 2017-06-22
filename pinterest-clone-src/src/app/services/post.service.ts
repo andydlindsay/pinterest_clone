@@ -14,7 +14,7 @@ export class PostService {
   ) { }
 
   loadToken() {
-    this.authToken = localStorage.getItem('access_token');
+    this.authToken = localStorage.getItem('id_token');
   }
 
   getPosts(itemsPerPage, currentPage) {
@@ -32,10 +32,11 @@ export class PostService {
       .map(res => res.json());
   }
 
-  getPostsByUser(sub) {
+  getPostsByUser(sub, itemsPerPage, currentPage) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(this.baseUrl + '/api/public/posts/byuser/' + sub, { headers })
+    const queryString = '?itemsperpage=' + itemsPerPage + '&currentpage=' + currentPage;
+    return this.http.get(this.baseUrl + '/api/public/posts/byuser/' + sub + queryString, { headers })
       .map(res => res.json());
   }
 
@@ -43,8 +44,8 @@ export class PostService {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     this.loadToken();
-    headers.append('Authorization', this.authToken);
-    return this.http.post(this.baseUrl + '/api/private/posts/new', { headers })
+    headers.append('Authorization', 'Bearer ' + this.authToken);
+    return this.http.post(this.baseUrl + '/api/private/posts/new', newPost, { headers })
       .map(res => res.json());
   }
 
@@ -63,6 +64,15 @@ export class PostService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     return this.http.post(this.baseUrl + '/api/private/fave/' + post_id, { sub }, { headers })
+      .map(res => res.json());
+  }
+
+  unfavePost(post_id, sub) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    return this.http.post(this.baseUrl + '/api/private/unfave/' + post_id, { sub }, { headers })
       .map(res => res.json());
   }
 
