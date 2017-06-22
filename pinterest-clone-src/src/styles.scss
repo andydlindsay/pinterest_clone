@@ -98,6 +98,10 @@ md-card {
     padding-top: 0px;
 }
 
+.mat-menu-panel {
+    min-width: 200px !important;
+}
+
 .standard-flex {
     display: flex;
     flex-wrap: wrap;

@@ -47,8 +47,8 @@ export class AuthService {
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
     this.auth0.client.userInfo(authResult.accessToken, (err, profile) => {
       if (profile) {
-        console.log('profile:', profile);
         localStorage.setItem('sub', profile.sub);
+        localStorage.setItem('nickname', profile.nickname);
       }
     });
     localStorage.setItem('access_token', authResult.accessToken);
@@ -63,6 +63,7 @@ export class AuthService {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     localStorage.removeItem('sub');
+    localStorage.removeItem('nickname');
     // Go back to the home route
     this.router.navigate(['/']);
   }

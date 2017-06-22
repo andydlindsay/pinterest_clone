@@ -14,9 +14,11 @@ import { AuthService } from './services/auth.service';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { HomeComponent } from './components/home/home.component';
+import { CallbackComponent } from './components/callback/callback.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'callback', component: CallbackComponent },
   { path: '**', redirectTo: '/' }
 ];
 
@@ -24,7 +26,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     NavigationComponent,
-    HomeComponent
+    HomeComponent,
+    CallbackComponent
   ],
   imports: [
     BrowserModule,

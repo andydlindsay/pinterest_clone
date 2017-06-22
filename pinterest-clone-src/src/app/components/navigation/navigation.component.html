@@ -16,15 +16,15 @@
             <md-icon>account_box</md-icon>
             <span class="title-font">Profile</span>
           </button>
-          <button md-menu-item>
+          <button md-menu-item (click)="onLogoutClick()">
             <md-icon>power_settings_new</md-icon>
             <span class="title-font">Logout</span>
           </button>
         </div>
         <div *ngIf="!isLoggedIn()">
-          <button md-menu-item>
+          <button md-menu-item (click)="onLoginClick()">
             <md-icon>power_settings_new</md-icon>
-            <span class="title-font">Sign In / Register</span>
+            <span class="title-font" >Sign In / Register</span>
           </button>
         </div>
       </md-menu>
