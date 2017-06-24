@@ -53,7 +53,7 @@ export class PostService {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     this.loadToken();
-    headers.append('Authorization', this.authToken);
+    headers.append('Authorization', 'Bearer ' + this.authToken);
     return this.http.delete(this.baseUrl + '/api/private/posts/' + post_id, { headers })
       .map(res => res.json());
   }
@@ -62,7 +62,7 @@ export class PostService {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     this.loadToken();
-    headers.append('Authorization', this.authToken);
+    headers.append('Authorization', 'Bearer ' + this.authToken);
     return this.http.post(this.baseUrl + '/api/private/fave/' + post_id, { sub }, { headers })
       .map(res => res.json());
   }
@@ -71,7 +71,7 @@ export class PostService {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     this.loadToken();
-    headers.append('Authorization', this.authToken);
+    headers.append('Authorization', 'Bearer ' + this.authToken);
     return this.http.post(this.baseUrl + '/api/private/unfave/' + post_id, { sub }, { headers })
       .map(res => res.json());
   }

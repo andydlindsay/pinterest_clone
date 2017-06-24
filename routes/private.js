@@ -24,14 +24,16 @@ const checkJwt = jwt({
 
 // add post (removed checkScopes from below June 21 2:20pm)
 router.post('/posts/new', checkJwt, (req, res) => {
-    let tags = req.body.tags.split(',');
     const newPost = new Post({
         sub: req.body.sub,
         nickname: req.body.nickname,
         imageUrl: req.body.imageUrl,
-        title: req.body.title || 'post by ' + req.body.nickname,
-        tags
+        title: req.body.title || 'post by ' + req.body.nickname
     });
+    if (req.body.tags !== undefined) {
+        let tags = req.body.tags.split(',');
+        newPost['tags'] = tags;
+    }
     Post.addPost(newPost, (err, doc) => {
         if (err) {
             res.json({ success: false, msg: 'Failed to save post.', errmsg: err.message });

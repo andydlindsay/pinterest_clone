@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '@angular/material';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MasonryModule } from 'angular2-masonry';
 import 'hammerjs';
 
 import { AuthGuard } from './guards/auth.guard';
@@ -43,7 +44,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     MaterialModule,
     FlashMessagesModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MasonryModule
   ],
   providers: [
     Title,

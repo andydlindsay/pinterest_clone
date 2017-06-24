@@ -1,5 +1,38 @@
 <md-card>
+
   <md-toolbar class="title-font accent">
     <span class="">All Posts</span>
   </md-toolbar>
+  
+  <md-card-content>
+
+    <!-- display while fetching posts -->
+    <div *ngIf="this.posts === undefined">
+      <md-spinner></md-spinner>
+    </div>
+
+    <!-- display when post fetching complete -->
+    <div *ngIf="this.posts !== undefined">
+
+      <!-- display if no posts -->
+      <div *ngIf="this.posts.length < 1" class="padding-bottom-8">
+        <h1 class="title-font text-center normal-font primary-text">There are no posts! Visit your profile page to create one now!</h1>
+      </div>
+
+      <!-- show posts -->
+      <div *ngIf="this.posts.length > 0" class="padding-bottom-8 padding-top-16 min-height-600 padding-left-16 padding-right-16">
+        <masonry [options]="myOptions" [useImagesLoaded]="true" class="margin-auto">
+          <masonry-brick class="brick" *ngFor="let post of posts">
+            <div class="margin-left-8 margin-right-8 margin-top-8 margin-bottom-8 primary title-font">
+              <img src="{{ post.imageUrl }}">
+            </div>
+          </masonry-brick>
+        </masonry>
+
+
+      </div>
+
+    </div>
+
+  </md-card-content>
 </md-card>

@@ -105,8 +105,10 @@ export class ProfileComponent implements OnInit {
         nickname,
         sub,
         imageUrl: this.postForm.value.imageUrl,
-        title: this.postForm.value.title,
-        tags: this.postForm.value.tags
+        title: this.postForm.value.title
+      }
+      if (this.postForm.value.tags.length > 0) {
+        newPost['tags'] = this.postForm.value.tags;
       }
       console.log('newPost:', newPost);
       this.postService.addPost(newPost).subscribe(

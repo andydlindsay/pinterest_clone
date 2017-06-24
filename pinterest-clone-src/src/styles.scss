@@ -55,7 +55,15 @@ md-card {
     padding: 0px !important;
 }
 
+img {
+    width: 100%;
+}
+
 // classes
+.brick {
+    max-width: 222px;
+}
+
 .primary-text {
     color: $primary-text-color;
 }
@@ -288,6 +296,48 @@ md-card {
 
 .margin-bottom-16 {
     margin-bottom: 16px !important;
+}
+
+.max-width-300 {
+    max-width: 300px !important;
+}
+
+.display-float-left {
+    display: float;
+    float: right;
+}
+
+.display-inline {
+    display: inline;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.width-300 {
+    width: 300px !important;
+}
+
+.min-height-600 {
+    min-height: 600px;
+}
+
+.grid-item {
+    width: 250px;
+    border-radius: 3px;
+    background-color: #3d1e37;
+}
+
+.grid-item-style {
+    height: auto;
+    position: absolute;
+}
+
+.grid {
+    position: relative;
+    width: 90%;
+    height: 968px;
 }
 
 // id's
