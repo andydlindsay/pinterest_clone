@@ -60,6 +60,10 @@ img {
 }
 
 // classes
+.font-size-big {
+    font-size: 1.15em;
+}
+
 .brick {
     max-width: 222px;
 }
@@ -338,6 +342,18 @@ img {
     position: relative;
     width: 90%;
     height: 968px;
+}
+
+.border-radius-5 {
+    border-radius: 5px;
+}
+
+.border-radius-top-right-5 {
+    border-top-right-radius: 5px;
+}
+
+.border-radius-top-left-5 {
+    border-top-left-radius: 5px;
 }
 
 // id's

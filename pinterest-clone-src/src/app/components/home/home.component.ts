@@ -44,4 +44,19 @@ export class HomeComponent implements OnInit {
     )
   }
 
+  favePost(post_id) {
+    this.postService.favePost(post_id).subscribe(
+      data => {
+        if (data.success) {
+
+        } else {
+          
+        }
+      },
+      err => {
+        console.error(err);
+      }
+    );
+  }
+
 }

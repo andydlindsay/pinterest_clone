@@ -19,6 +19,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { HomeComponent } from './components/home/home.component';
 import { CallbackComponent } from './components/callback/callback.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { UserComponent } from './components/user/user.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -33,7 +34,8 @@ const appRoutes: Routes = [
     NavigationComponent,
     HomeComponent,
     CallbackComponent,
-    ProfileComponent
+    ProfileComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

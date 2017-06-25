@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 export class PostService {
 
   authToken: any;
+  sub: string;
   baseUrl: String = 'http://localhost:8080';
   // baseUrl: String = '';
 
@@ -15,6 +16,7 @@ export class PostService {
 
   loadToken() {
     this.authToken = localStorage.getItem('id_token');
+    this.sub = localStorage.getItem('sub');
   }
 
   getPosts(itemsPerPage, currentPage) {
@@ -58,12 +60,12 @@ export class PostService {
       .map(res => res.json());
   }
 
-  favePost(post_id, sub) {
+  favePost(post_id) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     this.loadToken();
     headers.append('Authorization', 'Bearer ' + this.authToken);
-    return this.http.post(this.baseUrl + '/api/private/fave/' + post_id, { sub }, { headers })
+    return this.http.post(this.baseUrl + '/api/private/fave/' + post_id, { sub: this.sub }, { headers })
       .map(res => res.json());
   }
 
