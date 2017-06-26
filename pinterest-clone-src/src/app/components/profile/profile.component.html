@@ -41,8 +41,28 @@
       </div>
 
       <!-- show posts -->
-      <div *ngIf="this.posts.length > 0" class="padding-bottom-8">
-        
+      <div *ngIf="this.posts.length > 0" class="padding-bottom-8 padding-top-16 min-height-600 padding-left-16 padding-right-16">
+        <masonry [options]="myOptions" [useImagesLoaded]="true" class="margin-auto">
+          <masonry-brick class="brick" *ngFor="let post of posts">
+            <div class="margin-left-0 margin-right-0 margin-top-0 margin-bottom-8 padding-bottom-8 primary-light title-font border-radius-5 text-center font-size-one-and-a-quarter">
+              <img class="border-radius-top-left-5 border-radius-top-right-5" src="{{ post.imageUrl }}">
+              <span class="text-center font-size-big">{{ post.title }}</span>
+              <div class="standard-flex">
+                <span class="flex-1">
+                  <button md-button color="accent" class="title-font">
+                    <md-icon>delete</md-icon>
+                  </button>
+                </span>
+                <span class="flex-1"></span>
+                <span class="flex-1">
+                  <button md-button color="accent" class="title-font">
+                    <md-icon>favorite_border</md-icon>&nbsp;{{ post.faves.length }}
+                  </button>
+                </span>
+              </div>
+            </div>
+          </masonry-brick>
+        </masonry>
       </div>
 
     </div>

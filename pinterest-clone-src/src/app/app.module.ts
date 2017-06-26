@@ -24,6 +24,7 @@ import { UserComponent } from './components/user/user.component';
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'user/:id', component: UserComponent },
   { path: 'callback', component: CallbackComponent },
   { path: '**', redirectTo: '/' }
 ];

@@ -5,6 +5,7 @@ import { PostService } from '../../services/post.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MasonryOptions } from 'angular2-masonry';
 
 @Component({
   selector: 'app-profile',
@@ -27,6 +28,14 @@ export class ProfileComponent implements OnInit {
       'required': 'A url is required.'
     }
   };
+  myOptions: MasonryOptions = {
+    transitionDuration: '0.8s',
+    originLeft: true,
+    resize: true,
+    gutter: 10,
+    fitWidth: true
+  };
+  imagesLoaded: any;
 
   constructor(
     private titleService: Title,
