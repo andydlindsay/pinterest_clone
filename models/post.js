@@ -13,8 +13,8 @@ const postSchema = mongoose.Schema({
     },
     imageUrl: {
         type: String,
-        trim: true,
-        match: /(https?:\/\/)(www\.)?[-a-zA-Z0-9:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9\/:%_\+.~#?&//=]*)/ig
+        trim: true
+        // match: /(https?:\/\/)(www\.)?[-a-zA-Z0-9:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9\/:%_\+.~#?&//=]*)/ig
     },
     title: {
         type: String,

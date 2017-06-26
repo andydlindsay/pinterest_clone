@@ -6,6 +6,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MasonryOptions } from 'angular2-masonry';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -42,7 +43,8 @@ export class ProfileComponent implements OnInit {
     private fb: FormBuilder,
     private auth: AuthService,
     private postService: PostService,
-    private flashMessage: FlashMessagesService
+    private flashMessage: FlashMessagesService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -122,8 +124,15 @@ export class ProfileComponent implements OnInit {
       console.log('newPost:', newPost);
       this.postService.addPost(newPost).subscribe(
         data => {
+          console.log('data event fired');
+          console.log('data:', data);
           if (data.success) {
             this.flashMessage.show('Post successfully created!', { cssClass: 'alert alert-success' });
+            const currentUrl = this.router.url;
+            const refreshUrl = currentUrl.indexOf('someRoute') > -1 ? '/someOtherRoute' : '/someRoute';
+            this.router.navigateByUrl(refreshUrl).then(() => {
+              this.router.navigateByUrl(currentUrl);
+            });
           }
         },
         err => {
@@ -131,6 +140,24 @@ export class ProfileComponent implements OnInit {
         }
       );
     }
+  }
+
+  onDeleteClick(post_id) {
+    this.postService.deletePost(post_id).subscribe(
+      data => {
+        if (data.success) {
+          this.flashMessage.show('Post deleted!', { cssClass: 'alert alert-failure' });
+          const currentUrl = this.router.url;
+          const refreshUrl = currentUrl.indexOf('someRoute') > -1 ? '/someOtherRoute' : '/someRoute';
+          this.router.navigateByUrl(refreshUrl).then(() => {
+            this.router.navigateByUrl(currentUrl);
+          });
+        }
+      },
+      err => {
+        console.error(err);
+      }
+    );
   }
 
 }
