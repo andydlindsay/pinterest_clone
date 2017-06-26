@@ -68,7 +68,18 @@ module.exports.addPost = function(newPost, callback) {
 
 // fave a post
 module.exports.favePost = function(post_id, sub, callback) {
-    Post.findByIdAndUpdate(post_id, { $push: { 'faves': sub }}, callback);
+    Post.find({ '_id': post_id, 'faves': sub }, (err, doc) => {
+        if (err) {
+            callback(err);
+        }
+        if (doc) {
+            if (doc.length > 0) {
+                console.log('You cannot fave a post twice.');
+            } else {
+                Post.findByIdAndUpdate(post_id, { $push: { 'faves': sub }}, callback);
+            }
+        }
+    });    
 }
 
 // unfave a post

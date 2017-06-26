@@ -67,12 +67,12 @@ export class PostService {
       .map(res => res.json());
   }
 
-  unfavePost(post_id, sub) {
+  unfavePost(post_id) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     this.loadToken();
     headers.append('Authorization', 'Bearer ' + this.authToken);
-    return this.http.post(this.baseUrl + '/api/private/unfave/' + post_id, { sub }, { headers })
+    return this.http.post(this.baseUrl + '/api/private/unfave/' + post_id, { sub: this.sub }, { headers })
       .map(res => res.json());
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { PostService } from '../../services/post.service';
+import { AuthService } from '../../services/auth.service';
 import { MasonryOptions } from 'angular2-masonry';
 
 @Component({
@@ -22,7 +23,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private titleService: Title,
-    private postService: PostService
+    private postService: PostService,
+    private authService: AuthService
   ) { }
 
   ngOnInit() {
@@ -40,19 +42,50 @@ export class HomeComponent implements OnInit {
     )
   }
 
-  favePost(post_id) {
+  favePost(post_id, index) {
     this.postService.favePost(post_id).subscribe(
       data => {
         if (data.success) {
-
-        } else {
-          
+          const sub = localStorage.getItem('sub');
+          this.posts[index].faves.push(sub);
         }
       },
       err => {
         console.error(err);
       }
     );
+  }
+
+  unfavePost(post_id, index) {
+    this.postService.unfavePost(post_id).subscribe(
+      data => {
+        if (data.success) {
+          const sub = localStorage.getItem('sub');
+          const faveIndex = this.posts[index].faves.indexOf(sub);
+          this.posts[index].faves.splice(faveIndex, 1);
+        }
+      },
+      err => {
+        console.error(err);
+      }
+    );
+  }
+
+  isFave(index) {
+    if (this.authService.isAuthenticated()) {
+      const sub = localStorage.getItem('sub');
+      if (this.posts[index].faves.indexOf(sub) === -1) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  isLoggedIn() {
+    return this.authService.isAuthenticated();
   }
 
 }
