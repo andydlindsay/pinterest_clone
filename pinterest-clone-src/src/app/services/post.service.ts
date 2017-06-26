@@ -7,8 +7,8 @@ export class PostService {
 
   authToken: any;
   sub: string;
-  baseUrl: String = 'http://localhost:8080';
-  // baseUrl: String = '';
+  // baseUrl: String = 'http://localhost:8080';
+  baseUrl: String = '';
 
   constructor(
     private http: Http
