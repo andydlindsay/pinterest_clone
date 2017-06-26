@@ -37,12 +37,9 @@ const postSchema = mongoose.Schema({
 const Post = module.exports = mongoose.model("Post", postSchema, "posts");
 
 // get all posts
-module.exports.getPosts = function(itemsPerPage, currentPage, callback) {
-    const currPage = Number(currentPage) || 1;
+module.exports.getPosts = function(callback) {
     Post.find()
         .sort({ 'ts': 'desc' })
-        .skip(Number(itemsPerPage) * (currPage - 1))
-        .limit(Number(itemsPerPage))
         .exec(callback);
 }
 
@@ -57,13 +54,10 @@ module.exports.deletePost = function(post_id, callback) {
 }
 
 // get posts by user
-module.exports.getPostsByUser = function(sub, itemsPerPage, currentPage, callback) {
-    const currPage = Number(currentPage) || 1;
+module.exports.getPostsByUser = function(sub, callback) {
     const query = { sub };
     Post.find(query)
         .sort({ 'ts': 'desc' })
-        .skip(Number(itemsPerPage) * (currPage - 1))
-        .limit(Number(itemsPerPage))
         .exec(callback);
 };
 

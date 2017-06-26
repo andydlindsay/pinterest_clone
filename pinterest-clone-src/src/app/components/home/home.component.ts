@@ -11,8 +11,6 @@ import { MasonryOptions } from 'angular2-masonry';
 export class HomeComponent implements OnInit {
 
   posts: any;
-  itemsPerPage: number;
-  currentPage: number;
   myOptions: MasonryOptions = {
     transitionDuration: '0.8s',
     originLeft: true,
@@ -29,9 +27,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.titleService.setTitle('Home - Interestink');
-    this.itemsPerPage = 20;
-    this.currentPage = 1;
-    this.postService.getPosts(this.itemsPerPage, this.currentPage).subscribe(
+    this.postService.getPosts().subscribe(
       data => {
         if (data) {
           this.posts = data.posts;

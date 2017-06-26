@@ -4,9 +4,7 @@ const express = require('express'),
 
 // get all posts
 router.get('/posts', (req, res) => {
-    const itemsPerPage = req.query.itemsperpage;
-    const currentPage = req.query.currentpage;
-    Post.getPosts(itemsPerPage, currentPage, (err, docs) => {
+    Post.getPosts((err, docs) => {
         if (err) {
             res.json({ success: false, msg: 'Failed to get posts.', errmsg: err.message });
         } else if (docs) {
@@ -34,9 +32,7 @@ router.get('/posts/:id', (req, res) => {
 // get posts by user
 router.get('/posts/byuser/:sub', (req, res) => {
     const sub = req.params.sub;
-    const itemsPerPage = req.query.itemsperpage;
-    const currentPage = req.query.currentpage;
-    Post.getPostsByUser(sub, itemsPerPage, currentPage, (err, docs) => {
+    Post.getPostsByUser(sub, (err, docs) => {
         if (err) {
             res.json({ success: false, msg: 'Failed to find posts.', errmsg: err.message });
         } else if (docs) {

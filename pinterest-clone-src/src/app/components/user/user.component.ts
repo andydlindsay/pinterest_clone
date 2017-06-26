@@ -12,8 +12,6 @@ import { MasonryOptions } from 'angular2-masonry';
 export class UserComponent implements OnInit {
 
   posts: any;
-  itemsPerPage: number;
-  currentPage: number;
   myOptions: MasonryOptions = {
     transitionDuration: '0.8s',
     originLeft: true,
@@ -35,9 +33,7 @@ export class UserComponent implements OnInit {
     this.route.params
       .subscribe( params => {
         const user_sub = params['id'];
-        this.itemsPerPage = 20;
-        this.currentPage = 1;
-        this.postService.getPostsByUser(user_sub, this.itemsPerPage, this.currentPage).subscribe(
+        this.postService.getPostsByUser(user_sub).subscribe(
           data => {
             if (data) {
               this.posts = data.posts;

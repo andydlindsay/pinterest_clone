@@ -19,11 +19,10 @@ export class PostService {
     this.sub = localStorage.getItem('sub');
   }
 
-  getPosts(itemsPerPage, currentPage) {
+  getPosts() {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    const queryString = '?itemsperpage=' + itemsPerPage + '&currentpage=' + currentPage;
-    return this.http.get(this.baseUrl + '/api/public/posts' + queryString, { headers })
+    return this.http.get(this.baseUrl + '/api/public/posts', { headers })
       .map(res => res.json());
   }
 
@@ -34,11 +33,10 @@ export class PostService {
       .map(res => res.json());
   }
 
-  getPostsByUser(sub, itemsPerPage, currentPage) {
+  getPostsByUser(sub) {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    const queryString = '?itemsperpage=' + itemsPerPage + '&currentpage=' + currentPage;
-    return this.http.get(this.baseUrl + '/api/public/posts/byuser/' + sub + queryString, { headers })
+    return this.http.get(this.baseUrl + '/api/public/posts/byuser/' + sub, { headers })
       .map(res => res.json());
   }
 

@@ -16,8 +16,6 @@ import { Router } from '@angular/router';
 export class ProfileComponent implements OnInit {
 
   posts: any;
-  itemsPerPage: number;
-  currentPage: number;
   postForm: FormGroup;
   formErrors = {
     'imageUrl': '',
@@ -49,11 +47,9 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.titleService.setTitle('Profile - Interestink');
-    this.itemsPerPage = 10;
-    this.currentPage = 1;
     const sub = localStorage.getItem('sub');
     if (sub !== undefined) {
-      this.postService.getPostsByUser(sub, this.itemsPerPage, this.currentPage).subscribe(
+      this.postService.getPostsByUser(sub).subscribe(
         data => {
           this.posts = data.posts;
           console.log('posts:', this.posts);
@@ -99,14 +95,6 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  isFirstPage() {
-    if (this.currentPage === 1) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   onPostFormSubmit() {
     // check if form is valid
     if (this.postForm.valid) {
@@ -124,8 +112,6 @@ export class ProfileComponent implements OnInit {
       console.log('newPost:', newPost);
       this.postService.addPost(newPost).subscribe(
         data => {
-          console.log('data event fired');
-          console.log('data:', data);
           if (data.success) {
             this.flashMessage.show('Post successfully created!', { cssClass: 'alert alert-success' });
             const currentUrl = this.router.url;
@@ -133,6 +119,8 @@ export class ProfileComponent implements OnInit {
             this.router.navigateByUrl(refreshUrl).then(() => {
               this.router.navigateByUrl(currentUrl);
             });
+          } else {
+            this.flashMessage.show(data.msg + ' Please try again.', { cssClass: 'alert alert-failure' });
           }
         },
         err => {
